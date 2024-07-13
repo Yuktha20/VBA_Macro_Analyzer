@@ -1,0 +1,142 @@
+// VBA Macro Flowchart
+digraph {
+	node [shape=box]
+	"Attribute VB_Name = \"Module1\"" [label="Attribute VB_Name = \"Module1\""]
+	"Option Explicit" [label="Option Explicit"]
+	"Attribute VB_Name = \"Module1\"" -> "Option Explicit"
+	"Public Const paramSeparator = \",\"" [label="Public Const paramSeparator = \",\""]
+	"Option Explicit" -> "Public Const paramSeparator = \",\""
+	"" [label=""]
+	"Public Const paramSeparator = \",\"" -> ""
+	"'Please note: These macros do not check for IFERROR and ISERROR recursively" [label="'Please note: These macros do not check for IFERROR and ISERROR recursively"]
+	"'Please note: these macros fail when your formulas has paramSeperator in double quotes." [label="'Please note: these macros fail when your formulas has paramSeperator in double quotes."]
+	"'Please note":" These macros do not check for IFERROR and ISERROR recursively" -> "'Please note":" these macros fail when your formulas has paramSeperator in double quotes."
+	"'ie =IFERROR(VLOOKUP(\"where,is\"....),\"Error\") would fail as the lookup text has a comma" [label="'ie =IFERROR(VLOOKUP(\"where,is\"....),\"Error\") would fail as the lookup text has a comma"]
+	"'Please note":" these macros fail when your formulas has paramSeperator in double quotes." -> "'ie =IFERROR(VLOOKUP(\"where,is\"....),\"Error\") would fail as the lookup text has a comma"
+	"'Keep a backup of your data / files to avoid loosing your formulas" [label="'Keep a backup of your data / files to avoid loosing your formulas"]
+	"'ie =IFERROR(VLOOKUP(\"where,is\"....),\"Error\") would fail as the lookup text has a comma" -> "'Keep a backup of your data / files to avoid loosing your formulas"
+	"" [label=""]
+	"'Keep a backup of your data / files to avoid loosing your formulas" -> ""
+	"Sub iferror2iserror()" [label="Sub iferror2iserror()"]
+	"'this macro checks the selected cells for IFERROR formulas and converts them to ISERROR formulas" [label="'this macro checks the selected cells for IFERROR formulas and converts them to ISERROR formulas"]
+	"Sub iferror2iserror()" -> "'this macro checks the selected cells for IFERROR formulas and converts them to ISERROR formulas"
+	"'If you wish to do the reverse, just run this macro from last line to first" [label="'If you wish to do the reverse, just run this macro from last line to first"]
+	"'this macro checks the selected cells for IFERROR formulas and converts them to ISERROR formulas" -> "'If you wish to do the reverse, just run this macro from last line to first"
+	"'Of course I am kidding, just use iserror2iferror() instead!" [label="'Of course I am kidding, just use iserror2iferror() instead!"]
+	"'If you wish to do the reverse, just run this macro from last line to first" -> "'Of course I am kidding, just use iserror2iferror() instead!"
+	"" [label=""]
+	"'Of course I am kidding, just use iserror2iferror() instead!" -> ""
+	"'How it works:" [label="'How it works:"]
+	"'We take a formula like =IFERROR(expression,error) and convert it to =IF(ISERROR(expression),error,expression)" [label="'We take a formula like =IFERROR(expression,error) and convert it to =IF(ISERROR(expression),error,expression)"]
+	"'How it works" -> "'We take a formula like =IFERROR(expression,error) and convert it to =IF(ISERROR(expression),error,expression)"
+	"" [label=""]
+	"'We take a formula like =IFERROR(expression,error) and convert it to =IF(ISERROR(expression),error,expression)" -> ""
+	"On Error GoTo eh" [label="On Error GoTo eh"]
+	"" [label=""]
+	"On Error GoTo eh" -> ""
+	"For Each cell In Selection" [label="For Each cell In Selection"]
+	"With cell" [label="With cell"]
+	"For Each cell In Selection" -> "With cell"
+	"If .HasFormula Then" [label="If .HasFormula Then"]
+	"With cell" -> "If .HasFormula Then"
+	"If formula Like \"=IFERROR*\" Then" [label="If formula Like \"=IFERROR*\" Then"]
+	"If .HasFormula Then" -> "If formula Like \"=IFERROR*\" Then"
+	"'MsgBox (formula)" [label="'MsgBox (formula)"]
+	"If formula Like \"=IFERROR*\" Then" -> "'MsgBox (formula)"
+	".formula = formula" [label=".formula = formula"]
+	"'MsgBox (formula)" -> ".formula = formula"
+	"End If" [label="End If"]
+	".formula = formula" -> "End If"
+	"End If" [label="End If"]
+	"End If" -> "End If"
+	"End With" [label="End With"]
+	"End If" -> "End With"
+	"Next cell" [label="Next cell"]
+	"End With" -> "Next cell"
+	"Selection.Calculate" [label="Selection.Calculate"]
+	"Next cell" -> "Selection.Calculate"
+	"eh:" [label="eh:"]
+	"Selection.Calculate" -> eh
+	"'do nothing and exit sub" [label="'do nothing and exit sub"]
+	eh -> "'do nothing and exit sub"
+	"End Sub" [label="End Sub"]
+	"'do nothing and exit sub" -> "End Sub"
+	"Sub iserror2iferror()" [label="Sub iserror2iferror()"]
+	"End Sub" -> "Sub iserror2iferror()"
+	"'this macro checks the selected cells for ISERROR formulas and converts them to IFERROR formulas" [label="'this macro checks the selected cells for ISERROR formulas and converts them to IFERROR formulas"]
+	"Sub iserror2iferror()" -> "'this macro checks the selected cells for ISERROR formulas and converts them to IFERROR formulas"
+	"'If you wish to do the reverse, just run this macro from last line to first" [label="'If you wish to do the reverse, just run this macro from last line to first"]
+	"'this macro checks the selected cells for ISERROR formulas and converts them to IFERROR formulas" -> "'If you wish to do the reverse, just run this macro from last line to first"
+	"'Of course I am kidding, just use iferror2iserror() instead!" [label="'Of course I am kidding, just use iferror2iserror() instead!"]
+	"'If you wish to do the reverse, just run this macro from last line to first" -> "'Of course I am kidding, just use iferror2iserror() instead!"
+	"" [label=""]
+	"'Of course I am kidding, just use iferror2iserror() instead!" -> ""
+	"'How it works:" [label="'How it works:"]
+	"'We take a formula like  =IF(ISERROR(expression),error,expression) and convert it to =IFERROR(expression,error)" [label="'We take a formula like  =IF(ISERROR(expression),error,expression) and convert it to =IFERROR(expression,error)"]
+	"'How it works" -> "'We take a formula like  =IF(ISERROR(expression),error,expression) and convert it to =IFERROR(expression,error)"
+	"" [label=""]
+	"'We take a formula like  =IF(ISERROR(expression),error,expression) and convert it to =IFERROR(expression,error)" -> ""
+	"On Error GoTo eh" [label="On Error GoTo eh"]
+	"" [label=""]
+	"On Error GoTo eh" -> ""
+	"For Each cell In Selection" [label="For Each cell In Selection"]
+	"With cell" [label="With cell"]
+	"For Each cell In Selection" -> "With cell"
+	"If .HasFormula Then" [label="If .HasFormula Then"]
+	"With cell" -> "If .HasFormula Then"
+	"If formula Like \"=IF(ISERROR*\" Then" [label="If formula Like \"=IF(ISERROR*\" Then"]
+	"If .HasFormula Then" -> "If formula Like \"=IF(ISERROR*\" Then"
+	"'MsgBox (formula)" [label="'MsgBox (formula)"]
+	"If formula Like \"=IF(ISERROR*\" Then" -> "'MsgBox (formula)"
+	".formula = formula" [label=".formula = formula"]
+	"'MsgBox (formula)" -> ".formula = formula"
+	"End If" [label="End If"]
+	".formula = formula" -> "End If"
+	"End If" [label="End If"]
+	"End If" -> "End If"
+	"End With" [label="End With"]
+	"End If" -> "End With"
+	"Next cell" [label="Next cell"]
+	"End With" -> "Next cell"
+	"Selection.Calculate" [label="Selection.Calculate"]
+	"Next cell" -> "Selection.Calculate"
+	"eh:" [label="eh:"]
+	"Selection.Calculate" -> eh
+	"'do nothing and exit sub" [label="'do nothing and exit sub"]
+	eh -> "'do nothing and exit sub"
+	"" [label=""]
+	"'do nothing and exit sub" -> ""
+	"End Sub" [label="End Sub"]
+	"" [label=""]
+	"End Sub" -> ""
+	"Function whereIsSeparator(inThisFormula As String) As Integer" [label="Function whereIsSeparator(inThisFormula As String) As Integer"]
+	"'returns the position of paramSeparator inThisFormula by parsing it." [label="'returns the position of paramSeparator inThisFormula by parsing it."]
+	"Function whereIsSeparator(inThisFormula As String) As Integer" -> "'returns the position of paramSeparator inThisFormula by parsing it."
+	"" [label=""]
+	"'returns the position of paramSeparator inThisFormula by parsing it." -> ""
+	"" [label=""]
+	"" [label=""]
+	"For temp1 = 1 To fLen" [label="For temp1 = 1 To fLen"]
+	"If Mid(inThisFormula, temp1, 1) = paramSeparator And openBracketCount = 0 Then" [label="If Mid(inThisFormula, temp1, 1) = paramSeparator And openBracketCount = 0 Then"]
+	"For temp1 = 1 To fLen" -> "If Mid(inThisFormula, temp1, 1) = paramSeparator And openBracketCount = 0 Then"
+	"'we got a winner." [label="'we got a winner."]
+	"If Mid(inThisFormula, temp1, 1) = paramSeparator And openBracketCount = 0 Then" -> "'we got a winner."
+	"Exit For" [label="Exit For"]
+	"'we got a winner." -> "Exit For"
+	"End If" [label="End If"]
+	"Exit For" -> "End If"
+	"If Mid(inThisFormula, temp1, 1) = \"(\" Then" [label="If Mid(inThisFormula, temp1, 1) = \"(\" Then"]
+	"End If" -> "If Mid(inThisFormula, temp1, 1) = \"(\" Then"
+	"ElseIf Mid(inThisFormula, temp1, 1) = \")\" Then" [label="ElseIf Mid(inThisFormula, temp1, 1) = \")\" Then"]
+	"If Mid(inThisFormula, temp1, 1) = \"(\" Then" -> "ElseIf Mid(inThisFormula, temp1, 1) = \")\" Then"
+	Else [label=Else]
+	"ElseIf Mid(inThisFormula, temp1, 1) = \")\" Then" -> Else
+	"'do nothing" [label="'do nothing"]
+	Else -> "'do nothing"
+	"End If" [label="End If"]
+	"'do nothing" -> "End If"
+	"Next temp1" [label="Next temp1"]
+	"End If" -> "Next temp1"
+	"End Function" [label="End Function"]
+	"Next temp1" -> "End Function"
+}
