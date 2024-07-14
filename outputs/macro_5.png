@@ -1,0 +1,131 @@
+// VBA Macro Flowchart
+digraph {
+	node [shape=box]
+	"Attribute VB_Name = \"Module1\"" [label="Attribute VB_Name = \"Module1\""]
+	"Sub CreatePowerPoint()" [label="Sub CreatePowerPoint()"]
+	"Attribute VB_Name = \"Module1\"" -> "Sub CreatePowerPoint()"
+	"" [label=""]
+	"Sub CreatePowerPoint()" -> ""
+	"'Add a reference to the Microsoft PowerPoint Library by:" [label="'Add a reference to the Microsoft PowerPoint Library by:"]
+	"'1. Go to Tools in the VBA menu" [label="'1. Go to Tools in the VBA menu"]
+	"'Add a reference to the Microsoft PowerPoint Library by" -> "'1. Go to Tools in the VBA menu"
+	"'2. Click on Reference" [label="'2. Click on Reference"]
+	"'1. Go to Tools in the VBA menu" -> "'2. Click on Reference"
+	"'3. Scroll down to Microsoft PowerPoint X.0 Object Library, check the box, and press Okay" [label="'3. Scroll down to Microsoft PowerPoint X.0 Object Library, check the box, and press Okay"]
+	"'2. Click on Reference" -> "'3. Scroll down to Microsoft PowerPoint X.0 Object Library, check the box, and press Okay"
+	"" [label=""]
+	"'3. Scroll down to Microsoft PowerPoint X.0 Object Library, check the box, and press Okay" -> ""
+	"'First we declare the variables we will be using" [label="'First we declare the variables we will be using"]
+	"" [label=""]
+	"'First we declare the variables we will be using" -> ""
+	"'Look for existing instance" [label="'Look for existing instance"]
+	"On Error Resume Next" [label="On Error Resume Next"]
+	"'Look for existing instance" -> "On Error Resume Next"
+	"Set newPowerPoint = GetObject(, \"PowerPoint.Application\")" [label="Set newPowerPoint = GetObject(, \"PowerPoint.Application\")"]
+	"On Error Resume Next" -> "Set newPowerPoint = GetObject(, \"PowerPoint.Application\")"
+	"On Error GoTo 0" [label="On Error GoTo 0"]
+	"Set newPowerPoint = GetObject(, \"PowerPoint.Application\")" -> "On Error GoTo 0"
+	"" [label=""]
+	"On Error GoTo 0" -> ""
+	"'Let's create a new PowerPoint" [label="'Let's create a new PowerPoint"]
+	"If newPowerPoint Is Nothing Then" [label="If newPowerPoint Is Nothing Then"]
+	"'Let's create a new PowerPoint" -> "If newPowerPoint Is Nothing Then"
+	"Set newPowerPoint = New PowerPoint.Application" [label="Set newPowerPoint = New PowerPoint.Application"]
+	"If newPowerPoint Is Nothing Then" -> "Set newPowerPoint = New PowerPoint.Application"
+	"End If" [label="End If"]
+	"Set newPowerPoint = New PowerPoint.Application" -> "End If"
+	"'Make a presentation in PowerPoint" [label="'Make a presentation in PowerPoint"]
+	"End If" -> "'Make a presentation in PowerPoint"
+	"If newPowerPoint.Presentations.Count = 0 Then" [label="If newPowerPoint.Presentations.Count = 0 Then"]
+	"'Make a presentation in PowerPoint" -> "If newPowerPoint.Presentations.Count = 0 Then"
+	"newPowerPoint.Presentations.Add" [label="newPowerPoint.Presentations.Add"]
+	"If newPowerPoint.Presentations.Count = 0 Then" -> "newPowerPoint.Presentations.Add"
+	"End If" [label="End If"]
+	"newPowerPoint.Presentations.Add" -> "End If"
+	"" [label=""]
+	"End If" -> ""
+	"'Show the PowerPoint" [label="'Show the PowerPoint"]
+	"newPowerPoint.Visible = True" [label="newPowerPoint.Visible = True"]
+	"'Show the PowerPoint" -> "newPowerPoint.Visible = True"
+	"" [label=""]
+	"newPowerPoint.Visible = True" -> ""
+	"'Loop through each chart in the Excel worksheet and paste them into the PowerPoint" [label="'Loop through each chart in the Excel worksheet and paste them into the PowerPoint"]
+	"For Each cht In ActiveSheet.ChartObjects" [label="For Each cht In ActiveSheet.ChartObjects"]
+	"'Loop through each chart in the Excel worksheet and paste them into the PowerPoint" -> "For Each cht In ActiveSheet.ChartObjects"
+	"" [label=""]
+	"For Each cht In ActiveSheet.ChartObjects" -> ""
+	"'Add a new slide where we will paste the chart" [label="'Add a new slide where we will paste the chart"]
+	"newPowerPoint.ActivePresentation.Slides.Add newPowerPoint.ActivePresentation.Slides.Count + 1, ppLayoutText" [label="newPowerPoint.ActivePresentation.Slides.Add newPowerPoint.ActivePresentation.Slides.Count + 1, ppLayoutText"]
+	"'Add a new slide where we will paste the chart" -> "newPowerPoint.ActivePresentation.Slides.Add newPowerPoint.ActivePresentation.Slides.Count + 1, ppLayoutText"
+	"newPowerPoint.ActiveWindow.View.GotoSlide newPowerPoint.ActivePresentation.Slides.Count" [label="newPowerPoint.ActiveWindow.View.GotoSlide newPowerPoint.ActivePresentation.Slides.Count"]
+	"newPowerPoint.ActivePresentation.Slides.Add newPowerPoint.ActivePresentation.Slides.Count + 1, ppLayoutText" -> "newPowerPoint.ActiveWindow.View.GotoSlide newPowerPoint.ActivePresentation.Slides.Count"
+	"Set activeSlide = newPowerPoint.ActivePresentation.Slides(newPowerPoint.ActivePresentation.Slides.Count)" [label="Set activeSlide = newPowerPoint.ActivePresentation.Slides(newPowerPoint.ActivePresentation.Slides.Count)"]
+	"newPowerPoint.ActiveWindow.View.GotoSlide newPowerPoint.ActivePresentation.Slides.Count" -> "Set activeSlide = newPowerPoint.ActivePresentation.Slides(newPowerPoint.ActivePresentation.Slides.Count)"
+	"" [label=""]
+	"Set activeSlide = newPowerPoint.ActivePresentation.Slides(newPowerPoint.ActivePresentation.Slides.Count)" -> ""
+	"'Copy the chart and paste it into the PowerPoint as a Metafile Picture" [label="'Copy the chart and paste it into the PowerPoint as a Metafile Picture"]
+	"cht.Select" [label="cht.Select"]
+	"'Copy the chart and paste it into the PowerPoint as a Metafile Picture" -> "cht.Select"
+	"ActiveChart.ChartArea.Copy" [label="ActiveChart.ChartArea.Copy"]
+	"cht.Select" -> "ActiveChart.ChartArea.Copy"
+	"activeSlide.Shapes.PasteSpecial(DataType:=ppPasteMetafilePicture).Select" [label="activeSlide.Shapes.PasteSpecial(DataType:=ppPasteMetafilePicture).Select"]
+	"ActiveChart.ChartArea.Copy" -> "activeSlide.Shapes.PasteSpecial(DataType":"=ppPasteMetafilePicture).Select"
+	"" [label=""]
+	"activeSlide.Shapes.PasteSpecial(DataType":"=ppPasteMetafilePicture).Select" -> ""
+	"'Set the title of the slide the same as the title of the chart" [label="'Set the title of the slide the same as the title of the chart"]
+	"activeSlide.Shapes(1).TextFrame.TextRange.Text = cht.Chart.ChartTitle.Text" [label="activeSlide.Shapes(1).TextFrame.TextRange.Text = cht.Chart.ChartTitle.Text"]
+	"'Set the title of the slide the same as the title of the chart" -> "activeSlide.Shapes(1).TextFrame.TextRange.Text = cht.Chart.ChartTitle.Text"
+	"" [label=""]
+	"activeSlide.Shapes(1).TextFrame.TextRange.Text = cht.Chart.ChartTitle.Text" -> ""
+	"'Adjust the positioning of the Chart on Powerpoint Slide" [label="'Adjust the positioning of the Chart on Powerpoint Slide"]
+	"newPowerPoint.ActiveWindow.Selection.ShapeRange.Left = 15" [label="newPowerPoint.ActiveWindow.Selection.ShapeRange.Left = 15"]
+	"'Adjust the positioning of the Chart on Powerpoint Slide" -> "newPowerPoint.ActiveWindow.Selection.ShapeRange.Left = 15"
+	"newPowerPoint.ActiveWindow.Selection.ShapeRange.Top = 125" [label="newPowerPoint.ActiveWindow.Selection.ShapeRange.Top = 125"]
+	"newPowerPoint.ActiveWindow.Selection.ShapeRange.Left = 15" -> "newPowerPoint.ActiveWindow.Selection.ShapeRange.Top = 125"
+	"" [label=""]
+	"newPowerPoint.ActiveWindow.Selection.ShapeRange.Top = 125" -> ""
+	"activeSlide.Shapes(2).Width = 200" [label="activeSlide.Shapes(2).Width = 200"]
+	"activeSlide.Shapes(2).Left = 505" [label="activeSlide.Shapes(2).Left = 505"]
+	"activeSlide.Shapes(2).Width = 200" -> "activeSlide.Shapes(2).Left = 505"
+	"" [label=""]
+	"activeSlide.Shapes(2).Left = 505" -> ""
+	"'If the chart is the \"US\" consumption chart, then enter the appropriate comments" [label="'If the chart is the \"US\" consumption chart, then enter the appropriate comments"]
+	"If InStr(activeSlide.Shapes(1).TextFrame.TextRange.Text, \"US\") Then" [label="If InStr(activeSlide.Shapes(1).TextFrame.TextRange.Text, \"US\") Then"]
+	"'If the chart is the \"US\" consumption chart, then enter the appropriate comments" -> "If InStr(activeSlide.Shapes(1).TextFrame.TextRange.Text, \"US\") Then"
+	"activeSlide.Shapes(2).TextFrame.TextRange.Text = Range(\"J7\").Value & vbNewLine" [label="activeSlide.Shapes(2).TextFrame.TextRange.Text = Range(\"J7\").Value & vbNewLine"]
+	"If InStr(activeSlide.Shapes(1).TextFrame.TextRange.Text, \"US\") Then" -> "activeSlide.Shapes(2).TextFrame.TextRange.Text = Range(\"J7\").Value & vbNewLine"
+	"activeSlide.Shapes(2).TextFrame.TextRange.InsertAfter (Range(\"J8\").Value & vbNewLine)" [label="activeSlide.Shapes(2).TextFrame.TextRange.InsertAfter (Range(\"J8\").Value & vbNewLine)"]
+	"activeSlide.Shapes(2).TextFrame.TextRange.Text = Range(\"J7\").Value & vbNewLine" -> "activeSlide.Shapes(2).TextFrame.TextRange.InsertAfter (Range(\"J8\").Value & vbNewLine)"
+	"'Else if the chart is the \"Renewable\" consumption chart, then enter the appropriate comments" [label="'Else if the chart is the \"Renewable\" consumption chart, then enter the appropriate comments"]
+	"activeSlide.Shapes(2).TextFrame.TextRange.InsertAfter (Range(\"J8\").Value & vbNewLine)" -> "'Else if the chart is the \"Renewable\" consumption chart, then enter the appropriate comments"
+	"ElseIf InStr(activeSlide.Shapes(1).TextFrame.TextRange.Text, \"Renewable\") Then" [label="ElseIf InStr(activeSlide.Shapes(1).TextFrame.TextRange.Text, \"Renewable\") Then"]
+	"'Else if the chart is the \"Renewable\" consumption chart, then enter the appropriate comments" -> "ElseIf InStr(activeSlide.Shapes(1).TextFrame.TextRange.Text, \"Renewable\") Then"
+	"activeSlide.Shapes(2).TextFrame.TextRange.Text = Range(\"J27\").Value & vbNewLine" [label="activeSlide.Shapes(2).TextFrame.TextRange.Text = Range(\"J27\").Value & vbNewLine"]
+	"ElseIf InStr(activeSlide.Shapes(1).TextFrame.TextRange.Text, \"Renewable\") Then" -> "activeSlide.Shapes(2).TextFrame.TextRange.Text = Range(\"J27\").Value & vbNewLine"
+	"activeSlide.Shapes(2).TextFrame.TextRange.InsertAfter (Range(\"J28\").Value & vbNewLine)" [label="activeSlide.Shapes(2).TextFrame.TextRange.InsertAfter (Range(\"J28\").Value & vbNewLine)"]
+	"activeSlide.Shapes(2).TextFrame.TextRange.Text = Range(\"J27\").Value & vbNewLine" -> "activeSlide.Shapes(2).TextFrame.TextRange.InsertAfter (Range(\"J28\").Value & vbNewLine)"
+	"activeSlide.Shapes(2).TextFrame.TextRange.InsertAfter (Range(\"J29\").Value & vbNewLine)" [label="activeSlide.Shapes(2).TextFrame.TextRange.InsertAfter (Range(\"J29\").Value & vbNewLine)"]
+	"activeSlide.Shapes(2).TextFrame.TextRange.InsertAfter (Range(\"J28\").Value & vbNewLine)" -> "activeSlide.Shapes(2).TextFrame.TextRange.InsertAfter (Range(\"J29\").Value & vbNewLine)"
+	"End If" [label="End If"]
+	"activeSlide.Shapes(2).TextFrame.TextRange.InsertAfter (Range(\"J29\").Value & vbNewLine)" -> "End If"
+	"" [label=""]
+	"End If" -> ""
+	"'Now let's change the font size of the callouts box" [label="'Now let's change the font size of the callouts box"]
+	"activeSlide.Shapes(2).TextFrame.TextRange.Font.Size = 16" [label="activeSlide.Shapes(2).TextFrame.TextRange.Font.Size = 16"]
+	"'Now let's change the font size of the callouts box" -> "activeSlide.Shapes(2).TextFrame.TextRange.Font.Size = 16"
+	"" [label=""]
+	"activeSlide.Shapes(2).TextFrame.TextRange.Font.Size = 16" -> ""
+	Next [label=Next]
+	"" [label=""]
+	Next -> ""
+	"AppActivate (\"Microsoft PowerPoint\")" [label="AppActivate (\"Microsoft PowerPoint\")"]
+	"Set activeSlide = Nothing" [label="Set activeSlide = Nothing"]
+	"AppActivate (\"Microsoft PowerPoint\")" -> "Set activeSlide = Nothing"
+	"Set newPowerPoint = Nothing" [label="Set newPowerPoint = Nothing"]
+	"Set activeSlide = Nothing" -> "Set newPowerPoint = Nothing"
+	"" [label=""]
+	"Set newPowerPoint = Nothing" -> ""
+	"End Sub" [label="End Sub"]
+	"" [label=""]
+	"End Sub" -> ""
+}
