@@ -95,7 +95,7 @@ def analyze():
                 analysis = analyze_vba_code(macro)
                 output_path = os.path.join(dest_dir, f'macro_{min_file_id}')
                 generate_documentation(analysis, output_path + '.txt')
-                generate_flowchart(analysis, output_path + '.txt')
+                generate_flowchart(analysis, output_path)
                 min_file_id += 1
 
             os.remove(file_path)  # Remove temporary file after processing
