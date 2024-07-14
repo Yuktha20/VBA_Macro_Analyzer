@@ -1,4 +1,5 @@
 import os
+import tempfile
 from flask import Flask, request, render_template, redirect, url_for, send_file
 from werkzeug.utils import secure_filename
 from extract import collect_files, extract_macros, analyze_vba_code, generate_documentation, generate_flowchart
@@ -8,11 +9,9 @@ import base64
 app = Flask(__name__)
 
 # Configuration
-UPLOAD_FOLDER = 'uploads'
 OUTPUT_FOLDER = 'outputs'
 ALLOWED_EXTENSIONS = {'xls', 'xlsm'}
 
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['OUTPUT_FOLDER'] = OUTPUT_FOLDER
 
 def allowed_file(filename):
@@ -81,15 +80,15 @@ def analyze():
         return redirect(request.url)
 
     files = request.files.getlist('files[]')
-    src_dir = app.config['UPLOAD_FOLDER']
     dest_dir = app.config['OUTPUT_FOLDER']
     min_file_id = 1
 
     for file in files:
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file_path = os.path.join(src_dir, filename)
-            file.save(file_path)
+            with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+                temp_file.write(file.read())
+                file_path = temp_file.name
 
             macros = extract_macros(file_path)
             for macro in macros:
@@ -99,7 +98,7 @@ def analyze():
                 generate_flowchart(analysis, output_path + '.png')
                 min_file_id += 1
 
-            os.remove(file_path)  # Remove uploaded file after processing
+            os.remove(file_path)  # Remove temporary file after processing
 
     return redirect(url_for('index'))
 
